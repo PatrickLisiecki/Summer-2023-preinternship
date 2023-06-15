@@ -1,23 +1,5 @@
-.text-red {
-    color: red;
-}
-
-.btn {
-    /* margin-bottom: 2em; */
-    width: 7em;
-    height: 3em;
-    text-align: center;
-}
-
-.btn-container {
-    height: 50vh;
-    display: flex;
-    place-content: center;
-    place-items: center;
-}
-
-.text-center {
-    text-align: center;
+* {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
