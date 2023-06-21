@@ -67,11 +67,107 @@ const jobs = [
     },
 ];
 
-console.log(document)
-console.log(document.body)
-console.log(document.getElementById("jobs"))
-console.log(document.querySelector("#jobs").id)
+console.log(document);
+console.log(document.body);
+console.log(document.getElementById("jobs"));
+console.log(document.querySelector("#jobs").id);
 
-const allJobs = Array.from(document.getElementsByClassName("j-desc"))
+const allJobs = Array.from(document.getElementsByClassName("j-desc"));
 
-console.log(allJobs)
+console.log(allJobs);
+
+document.querySelectorAll(".j-desc").forEach((jobDiv) => {
+    const jobTitle = jobDiv.querySelector(".j-desc__job-title").textContent;
+    console.log(jobTitle);
+});
+
+// function createNewJob() {
+//     // Create new job description div
+//     const jobDiv = document.createElement("div");
+//     jobDiv.className = "j-desc";
+
+//     // Create job details div
+//     const jobDetails = document.createElement("div");
+//     jobDetails.className = "j-desc__details";
+
+//     // Create job title
+//     const jobTitle = document.createElement("h2");
+//     jobTitle.className = "j-desc__job-title";
+//     jobTitle.textContent = "Newly Added Job Title";
+
+//     // Append newJobTitle to newJobDetails
+//     jobDetails.appendChild(jobTitle);
+
+//     // Append newJobDetails to newJob
+//     jobDiv.appendChild(jobDetails);
+
+//     // Append jobDiv to the jobs section
+//     document.querySelector("section#jobs").appendChild(jobDiv);
+// }
+
+function createNewJob(job) {
+    const jobDiv = document.createElement("div");
+    jobDiv.className = "j-desc";
+    jobDiv.innerHTML = `
+    <img
+      class="j-desc__company-image"
+    />
+    <div class="j-desc__details">
+      <h2 class="j-desc__job-title">
+        
+      </h2>
+      <p class="j-desc__company"></p>
+      <ul class="j-desc__metadata">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    `;
+
+    const {
+        image: { src, alt },
+        company,
+        title,
+        salary,
+        location,
+        postDate,
+    } = job;
+
+    const img = jobDiv.querySelector(".j-desc__company-image");
+    img.setAttribute("src", src);
+    img.setAttribute("alt", alt);
+
+    const titleEl = jobDiv.querySelector(".j-desc__job-title");
+    const companyEl = jobDiv.querySelector(".j-desc__company");
+    const [locationEl, salaryEl, postDateEl] =
+        jobDiv.getElementsByTagName("li");
+
+    titleEl.textContent = title;
+    companyEl.textContent = company;
+    locationEl.textContent = location;
+    salaryEl.textContent = salary;
+    postDateEl.textContent = postDate;
+
+    document.querySelector("section#jobs").appendChild(jobDiv);
+}
+
+createNewJob(jobs[3]);
+
+const jobTitles = document.getElementsByClassName("j-desc__job-title");
+
+for (let i = 0; i < jobTitles.length; i++) {
+    jobTitles[i].onclick = function () {
+        alert("You clicked on " + this.textContent);
+    };
+}
+
+for (let i = 0; i < jobTitles.length; i++) {
+    jobTitles[i].onmouseover = function () {
+        this.style.color = "lightblue";
+    };
+
+    jobTitles[i].onmouseout = function () {
+        this.style.color = "";
+    };
+}
