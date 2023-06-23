@@ -10,15 +10,15 @@ export default function JobCard({ job }) {
     } = job;
 
     return (
-        <div className="j-desc">
-            <img className="j-desc__company-image" src={src} alt={alt} />
-            <div className="j-desc__details">
-                <h2 className="j-desc__job-title">{title}</h2>
-                <p className="j-desc__company">{company}</p>
-                <ul className="j-desc__metadata">
-                    <li className="j-desc__location">{location}</li>
-                    <li className="j-desc__salary">{salary}</li>
-                    <li className="j-desc__posting_date">{postDate}</li>
+        <div className="flex items-start content-start gap-4 my-6">
+            <img src={src} alt={alt} />
+            <div>
+                <h2 className="text-xl font-bold relative -top-1.5">{title}</h2>
+                <p className="mb-2 text-gray-400 italic">{company}</p>
+                <ul className="text-sm">
+                    <li>{location}</li>
+                    <li>{salary}</li>
+                    <li>{postDate}</li>
                 </ul>
             </div>
         </div>

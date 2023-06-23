@@ -5,7 +5,7 @@ describe("factorial(num) should return the factorial of num", () => {
         expect(factorial(0)).toBe(1);
     });
 
-    test("factorial(0) => 1", () => {
+    test("factorial(1) => 1", () => {
         expect(factorial(1)).toBe(1);
     });
 

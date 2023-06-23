@@ -4,8 +4,8 @@ import "./App.css";
 
 function App() {
     const jobCards = jobs.map((job, i) => {
-        return <JobCard job={job} key={i} />
-    })
+        return <JobCard job={job} key={i} />;
+    });
 
     return (
         <div className="container">

@@ -8,7 +8,7 @@ function App() {
     });
 
     return (
-        <div className="container">
+        <div className="mx-auto max-w-4xl">
             <h1>Job Application Tracker</h1>
             {jobCards}
         </div>
