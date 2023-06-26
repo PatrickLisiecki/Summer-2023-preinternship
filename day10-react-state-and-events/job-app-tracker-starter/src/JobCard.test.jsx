@@ -1,9 +1,9 @@
 // JobCard.test.jsx
 import { test } from "vitest";
-import { render } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import JobCard from "./JobCard";
 
-test("Renders without crashing", () => {
+test("Renders the correct job information", () => {
     const job = {
         image: { src: "image.jpg", alt: "job image" },
         company: "Google",
@@ -14,4 +14,10 @@ test("Renders without crashing", () => {
     };
 
     render(<JobCard job={job} />);
+
+    expect(screen.getByText("Software Engineer")).toBeInTheDocument();
+    expect(screen.getByText("Google")).toBeInTheDocument();
+    expect(screen.getByText("100k")).toBeInTheDocument();
+    expect(screen.getByText("New York")).toBeInTheDocument();
+    expect(screen.getByText("2022-06-20")).toBeInTheDocument();
 });
