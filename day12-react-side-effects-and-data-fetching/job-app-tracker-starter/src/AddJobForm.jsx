@@ -22,18 +22,28 @@ function AddJobForm({ onAddJob }) {
         });
     };
 
-    const handleAddJobFormSubmit = (e) => {
+    const handleAddJobFormSubmit = async (e) => {
         e.preventDefault();
-        // modal should close
-        // form should clear
-        setJobFormState(initialJobFormState);
+
         // new job should be added to the DOM
-        onAddJob({
+        const preparedJob = {
             ...jobFormState,
             minSalary: parseInt(jobFormState.minSalary),
             maxSalary: parseInt(jobFormState.maxSalary),
             status: 1,
+        };
+        const response = await fetch("/jobs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(preparedJob),
         });
+        const newJob = await response.json();
+        // parent component should be notified of created job
+        onAddJob(newJob);
+        // form should clear
+        setJobFormState(initialJobFormState);
     };
 
     return (

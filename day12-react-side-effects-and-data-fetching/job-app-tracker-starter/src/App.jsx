@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
 import JobCard from "./JobCard";
 import jobsData from "./jobs";
@@ -19,6 +19,37 @@ function App() {
     const [jobs, setJobs] = useState(jobsData);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState(1);
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function fetchJobs() {
+            const response = await fetch("http://localhost:3000/jobs");
+            const jobs = await response.json();
+            if (!ignore) {
+                setJobs(jobs);
+            }
+            return jobs;
+        }
+
+        fetchJobs();
+
+        return () => {
+            ignore = true;
+        };
+    }, []);
+
+    // useEffect(() => {
+    //     const handleEscape = (event) => {
+    //         if (event.key === "Escape") {
+    //             hideModal();
+    //         }
+    //     };
+
+    //     window.addEventListener("keydown", handleEscape);
+
+    //     return () => window.removeEventListener("keydown", handleEscape);
+    // }, [hideModal]);
 
     const filteredJobs = jobs.filter((job) => job.status === selectedStatus);
 
