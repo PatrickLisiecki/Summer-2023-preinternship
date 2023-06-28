@@ -4,6 +4,7 @@ import JobCard from "./JobCard";
 import jobsData from "./jobs";
 import "./App.css";
 import Modal from "./ui/Modal";
+import AddJobForm from "./AddJobForm";
 
 const statuses = {
     1: "Bookmarked",
@@ -58,11 +59,25 @@ function App() {
     };
 
     const handleInputChange = (e) => {
-        setJobFormState();
+        setJobFormState((jobFormState) => {
+            return {
+                ...jobFormState,
+                [e.target.name]: e.target.value,
+            };
+        });
     };
 
-    const handleAddJobFormSubmit = (e) => {
-        e.preventDefault();
+    // in src/App.jsx
+    const AddJob = (job) => {
+        setJobs((jobs) =>
+            jobs.concat({
+                ...job,
+                minSalary: parseInt(job.minSalary),
+                maxSalary: parseInt(job.maxSalary),
+                status: 1,
+            })
+        );
+        hideModal();
     };
 
     return (
@@ -172,6 +187,7 @@ function App() {
                     <input
                         className="bg-white hover:bg-gray-200 transition mt-4 px-4 py-2 border-2 border-gray-800 cursor-pointer "
                         type="submit"
+                        onClick={AddJobForm}
                     />
                 </form>
             </Modal>

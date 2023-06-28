@@ -4,7 +4,7 @@ function JobCard({ job }) {
     // pull data from argument
     const {
         id,
-        image: { src, alt },
+        image,
         company,
         title,
         minSalary,
@@ -15,7 +15,7 @@ function JobCard({ job }) {
 
     return (
         <div data-testid="job-card" className="flex items-start gap-4 my-13">
-            <img src={src} alt={alt} />
+            {image ? <img src={image.src} alt={image.alt} /> : <img src="https://placehold.co/100x100" alt="Placeholder" />}
             <div>
                 <h2
                     className="text-xl font-bold relative -top-1.5"
